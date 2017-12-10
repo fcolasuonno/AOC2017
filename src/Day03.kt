@@ -1,4 +1,4 @@
-class Day3 {
+object Day03 {
 
     fun part1(input: Int) = input.let {
         var side = 1
@@ -15,11 +15,9 @@ class Day3 {
 
     fun part2(input: Int): Int {
         val matrix = mutableMapOf<Pair<Int, Int>, Int>()
-        var current = Pair(0, 0)
-        matrix[current] = 1
-        var acc = 0
-        while (acc <= input) {
-            current++
+        var acc = 1
+        matrix[Pair(0, 0)] = acc
+        pairGenerator.asIterable().takeWhile { current ->
             acc = matrix.getOrDefault(current.copy(current.first + 1, current.second + 1), 0) +
                     matrix.getOrDefault(current.copy(current.first, current.second + 1), 0) +
                     matrix.getOrDefault(current.copy(current.first - 1, current.second + 1), 0) +
@@ -29,46 +27,47 @@ class Day3 {
                     matrix.getOrDefault(current.copy(current.first + 1, current.second - 1), 0) +
                     matrix.getOrDefault(current.copy(current.first + 1, current.second), 0)
             matrix[current] = acc
+            acc <= input
         }
         return acc
     }
 
-
-}
-
-operator fun Pair<Int, Int>.inc(): Pair<Int, Int> {
-    val corner = Math.max(Math.abs(first), Math.abs(second))
-    if (first == 0 && second == 0) return Pair(1, 0)
-    if (first == corner && second == -corner) return Pair(first + 1, second)
-    val x_increment = when (first) {
-        corner -> when (second) {
-            corner -> -1
-            -corner -> 0
-            else -> 0
-        }
-        -corner -> when (second) {
-            -corner -> 1
-            else -> 0
-        }
-        else -> when (second) {
-            corner -> -1
-            else -> 1
+    val pairGenerator: Sequence<Pair<Int, Int>> = generateSequence(Pair(1, 0)) {
+        val corner = Math.max(Math.abs(it.first), Math.abs(it.second))
+        if (it.first == corner && it.second == -corner) {
+            Pair(it.first + 1, it.second)
+        } else {
+            val x_increment = when (it.first) {
+                corner -> when (it.second) {
+                    corner -> -1
+                    -corner -> 0
+                    else -> 0
+                }
+                -corner -> when (it.second) {
+                    -corner -> 1
+                    else -> 0
+                }
+                else -> when (it.second) {
+                    corner -> -1
+                    else -> 1
+                }
+            }
+            val y_increment = when (it.second) {
+                corner -> when (it.first) {
+                    -corner -> -1
+                    else -> 0
+                }
+                -corner -> when (it.first) {
+                    corner -> 1
+                    else -> 0
+                }
+                else -> when (it.first) {
+                    corner -> 1
+                    else -> -1
+                }
+            }
+            Pair(it.first + x_increment, it.second + y_increment)
         }
     }
-    val y_increment = when (second) {
-        corner -> when (first) {
-            -corner -> -1
-            else -> 0
-        }
-        -corner -> when (first) {
-            corner -> 1
-            else -> 0
-        }
-        else -> when (first) {
-            corner -> 1
-            else -> -1
-        }
-    }
-    return Pair(first + x_increment, second + y_increment)
 }
 

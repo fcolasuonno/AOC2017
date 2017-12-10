@@ -1,4 +1,4 @@
-class Day8 {
+object Day08 {
 
     fun part1(input: List<String>) = mutableMapOf<String, Int>().let { registers ->
         input.forEach { inputLine ->

@@ -1,4 +1,4 @@
-class Day9 {
+object Day09 {
 
     interface Visitor {
         fun accept(c: Char): Element

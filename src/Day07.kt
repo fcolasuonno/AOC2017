@@ -1,4 +1,4 @@
-class Day7 {
+object Day07 {
 
     data class Tower(val name: String, val weight: Int, val children: List<String>)
 

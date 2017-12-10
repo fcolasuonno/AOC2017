@@ -1,4 +1,4 @@
-class Day2 {
+object Day02 {
 
     fun part1(input: List<String>) = input.sumBy {
         it.split("\t", " ")

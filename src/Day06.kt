@@ -1,4 +1,4 @@
-class Day6 {
+object Day06 {
 
     fun part1(input: String) = input.split("\\s+".toRegex()).map { string -> string.toInt() }.toIntArray().let { banks ->
         var count = 0

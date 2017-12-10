@@ -1,4 +1,4 @@
-class Day5 {
+object Day05 {
 
     fun part1(input: List<String>) = input.map { string -> string.toInt() }.toIntArray().let {
         var count = 0

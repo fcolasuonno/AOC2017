@@ -3,33 +3,33 @@ import org.junit.Assert.assertNotNull
 import org.junit.Test
 import java.io.File
 
-class Day9Test {
+class Day09Test {
 
-    private val input = File("9/input.txt").readText()
-    private val day9 = Day9()
+    private val input = File("inputs/09/input.txt").readText()
+
 
     @Test
     fun cancellationTest() {
-        val root = Day9.Element.Root()
-        assertEquals(root, Day9.Element.Cancellation(root).accept('!'))
+        val root = Day09.Element.Root()
+        assertEquals(root, Day09.Element.Cancellation(root).accept('!'))
     }
 
     @Test
     fun garbageTest() {
-        val root = Day9.Element.Root()
-        val garbage = Day9.Element.Garbage(root)
+        val root = Day09.Element.Root()
+        val garbage = Day09.Element.Garbage(root)
         assertEquals(garbage, garbage.accept('a'))
-        assert(garbage.accept('!') is Day9.Element.Cancellation)
+        assert(garbage.accept('!') is Day09.Element.Cancellation)
         assertEquals(root, garbage.accept('>'))
         arrayListOf("<>", "<random characters>", "<<<<>", "<{!>}>", "<!!>", "<!!!>>", """<{o"i!a,<{i<a>""")
                 .onEach {
-                    assert(it.asIterable().fold(garbage as Day9.Element, { element, char -> element.accept(char) }) is Day9.Element.Root)
+                    assert(it.asIterable().fold(garbage as Day09.Element, { element, char -> element.accept(char) }) is Day09.Element.Root)
                 }
     }
 
     @Test
     fun ASTTest() {
-        val root = day9.createAST("{}") as? Day9.Element.Root
+        val root = Day09.createAST("{}") as? Day09.Element.Root
         assertNotNull(root)
         assertEquals(1, root?.group?.level)
         assertEquals(1, root?.groups())
@@ -49,7 +49,7 @@ class Day9Test {
                 "{<a>,<a>,<a>,<a>}",
                 "{{<a>},{<a>},{<a>},{<a>}}",
                 "{{<!>},{<!>},{<!>},{<a>}}"
-        ).map { day9.createAST(it).groups() })
+        ).map { Day09.createAST(it).groups() })
     }
 
     @Test
@@ -72,8 +72,8 @@ class Day9Test {
                 "{{<ab>},{<ab>},{<ab>},{<ab>}}",
                 "{{<!!>},{<!!>},{<!!>},{<!!>}}",
                 "{{<a!>},{<a!>},{<a!>},{<ab>}}"
-        ).map { day9.part1(it) })
-        assertEquals(9662, day9.part1(input))
+        ).map { Day09.part1(it) })
+        assertEquals(9662, Day09.part1(input))
     }
 
     @Test
@@ -94,7 +94,7 @@ class Day9Test {
                 "{<!!>}",
                 "{<!!!>>}",
                 """{<{o"i!a,<{i<a>,{}}"""
-        ).map { day9.part2(it) })
-        assertEquals(4903, day9.part2(input))
+        ).map { Day09.part2(it) })
+        assertEquals(4903, Day09.part2(input))
     }
 }

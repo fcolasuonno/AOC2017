@@ -1,4 +1,4 @@
-class Day4 {
+object Day04 {
 
     fun part1(input: List<String>) = input.count { passphrase ->
         passphrase.split(" ").let { word ->

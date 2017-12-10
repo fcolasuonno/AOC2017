@@ -1,4 +1,4 @@
-class Day1 {
+object Day01 {
 
     fun part1(input: String) = input
             .let { it + it.first() }

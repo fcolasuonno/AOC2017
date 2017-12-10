@@ -1,4 +1,4 @@
-class Day10 {
+object Day10 {
 
     fun part1(size: Int, input: String): Int {
         val knot = Array(size, { index -> index })
@@ -9,8 +9,8 @@ class Day10 {
             val endPosition = position + sliceSize
             val endIndices = position until Math.min(size, endPosition)
             val startIndices = 0 until Math.max(0, endPosition - size)
-            val reversedArray = (knot.sliceArray(endIndices) + knot.sliceArray(startIndices)).reversedArray()
             val modifiedPositions = endIndices + startIndices
+            val reversedArray = knot.sliceArray(modifiedPositions).reversedArray()
             modifiedPositions.forEachIndexed { index, knotIndex ->
                 knot[knotIndex] = reversedArray[index]
             }
@@ -32,8 +32,8 @@ class Day10 {
                 val endPosition = position + sliceSize
                 val endIndices = position until Math.min(size, endPosition)
                 val startIndices = 0 until Math.max(0, endPosition - size)
-                val reversedArray = (knot.sliceArray(endIndices) + knot.sliceArray(startIndices)).reversedArray()
                 val modifiedPositions = endIndices + startIndices
+                val reversedArray = knot.sliceArray(modifiedPositions).reversedArray()
                 modifiedPositions.forEachIndexed { index, knotIndex ->
                     knot[knotIndex] = reversedArray[index]
                 }

@@ -2,11 +2,11 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.io.File
 
-class Day7Test {
+class Day07Test {
 
 
-    private val input = File("7/input.txt").readLines()
-    private val day7 = Day7()
+    private val input = File("inputs/07/input.txt").readLines()
+
 
     @Test
     fun part1() {
@@ -23,8 +23,8 @@ class Day7Test {
                 "ugml (68) -> gyxo, ebii, jptl\n" +
                 "gyxo (61)\n" +
                 "cntj (57)"
-        assertEquals("tknk", day7.part1(testInput.split("\n")))
-        assertEquals("veboyvy", day7.part1(input))
+        assertEquals("tknk", Day07.part1(testInput.split("\n")))
+        assertEquals("veboyvy", Day07.part1(input))
     }
 
     @Test
@@ -42,7 +42,7 @@ class Day7Test {
                 "ugml (68) -> gyxo, ebii, jptl\n" +
                 "gyxo (61)\n" +
                 "cntj (57)"
-        assertEquals(60, day7.part2(testInput.split("\n")))
-        assertEquals(749, day7.part2(input))
+        assertEquals(60, Day07.part2(testInput.split("\n")))
+        assertEquals(749, Day07.part2(input))
     }
 }
