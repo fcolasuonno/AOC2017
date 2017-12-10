@@ -1,8 +1,5 @@
-import org.junit.Before
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
-import java.io.File
 
 class Day3Test {
 
@@ -36,20 +33,20 @@ class Day3Test {
 
     @Test
     fun incrementCoord() {
-        assertEquals(Pair(1,0), Pair(0,0).inc())
-        assertEquals(Pair(1,1), Pair(1,0).inc())
-        assertEquals(Pair(0,1), Pair(1,1).inc())
-        assertEquals(Pair(-1,1), Pair(0,1).inc())
-        assertEquals(Pair(-1,0), Pair(-1,1).inc())
-        assertEquals(Pair(-1,-1), Pair(-1,0).inc())
-        assertEquals(Pair(0,-1), Pair(-1,-1).inc())
-        assertEquals(Pair(1,-1), Pair(0,-1).inc())
-        assertEquals(Pair(2,-1), Pair(1,-1).inc())
+        assertEquals(Pair(1, 0), Pair(0, 0).inc())
+        assertEquals(Pair(1, 1), Pair(1, 0).inc())
+        assertEquals(Pair(0, 1), Pair(1, 1).inc())
+        assertEquals(Pair(-1, 1), Pair(0, 1).inc())
+        assertEquals(Pair(-1, 0), Pair(-1, 1).inc())
+        assertEquals(Pair(-1, -1), Pair(-1, 0).inc())
+        assertEquals(Pair(0, -1), Pair(-1, -1).inc())
+        assertEquals(Pair(1, -1), Pair(0, -1).inc())
+        assertEquals(Pair(2, -1), Pair(1, -1).inc())
 
-        assertEquals(Pair(1,2), Pair(2,2).inc())
-        assertEquals(Pair(-2,1), Pair(-2,2).inc())
-        assertEquals(Pair(-1,-2), Pair(-2,-2).inc())
-        assertEquals(Pair(3,-2), Pair(2,-2).inc())
+        assertEquals(Pair(1, 2), Pair(2, 2).inc())
+        assertEquals(Pair(-2, 1), Pair(-2, 2).inc())
+        assertEquals(Pair(-1, -2), Pair(-2, -2).inc())
+        assertEquals(Pair(3, -2), Pair(2, -2).inc())
 
     }
 }

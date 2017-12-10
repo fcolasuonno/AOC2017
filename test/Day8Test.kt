@@ -1,6 +1,5 @@
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 import java.io.File
 
 class Day8Test {

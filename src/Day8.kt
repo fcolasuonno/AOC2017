@@ -57,7 +57,7 @@ class Day8 {
                         else -> currentValue - amount.toInt()
                     }
                     registers[register] = newValue
-                    max = Math.max(max,newValue)
+                    max = Math.max(max, newValue)
                 }
             }
         }
