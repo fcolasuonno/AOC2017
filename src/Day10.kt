@@ -1,6 +1,6 @@
 object Day10 {
 
-    fun part1(size: Int, input: String): Int {
+    fun part1(input: String, size: Int = 256): Int {
         val knot = Array(size, { index -> index })
         var position = 0
         var skip = 0
@@ -20,7 +20,7 @@ object Day10 {
         return knot[0] * knot[1]
     }
 
-    fun part2(size: Int, input: String): String {
+    fun part2(input: String, size: Int = 256): String {
         val knot = Array(size, { index -> index })
         var position = 0
         var skip = 0
@@ -41,8 +41,7 @@ object Day10 {
 
             }
         }
-        val denseHash = knot.toList().windowed(size = 16, step = 16).map { it.reduce { acc, i -> acc.xor(i) } }
+        return knot.toList().windowed(size = 16, step = 16).map { it.reduce { acc, i -> acc.xor(i) } }
                 .joinToString(separator = "") { String.format("%02x", it) }
-        return denseHash
     }
 }
