@@ -20,9 +20,12 @@ class Day16Test {
     fun part2() {
         assertEquals(Day16.part2(input, iterations = 100), Day16.part2slow(input, iterations = 100))
         assertEquals(Day16.part2Faster(input, iterations = 100), Day16.part2(input, iterations = 100))
+        assertEquals(Day16.part2Smarter(input, iterations = 100), Day16.part2Faster(input, iterations = 100))
         //Takes about 2 minutes
 //        assertEquals("hklecbpnjigoafmd", Day16.part2(input, iterations = 1_000_000_000))
         //Takes about 11 seconds
-        assertEquals("hklecbpnjigoafmd", Day16.part2Faster(input, iterations = 1_000_000_000))
+//        assertEquals("hklecbpnjigoafmd", Day16.part2Faster(input, iterations = 1_000_000_000))
+        //Takes about 950 milliseconds
+        assertEquals("hklecbpnjigoafmd", Day16.part2Smarter(input, iterations = 1_000_000_000))
     }
 }

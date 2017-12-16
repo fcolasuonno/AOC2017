@@ -140,5 +140,45 @@ object Day16 {
                 }
                 (if (iterations % 2 == 1) a1 else a2).map { it.toChar() }.joinToString("")
             }
+
+    fun part2Smarter(instructions: List<String>, size: Int = 16, iterations: Int = 1): String = Array(size, { index -> 'a' + index })
+            .let { line ->
+                val outputs = mutableListOf<String>()
+                val seen = mutableSetOf<String>()
+                for (i in 0 until iterations) {
+                    instructions.forEach {
+                        when (it[0]) {
+                            's' -> {
+                                val pos = it.substring(1).toInt()
+                                val head = line.sliceArray(size - pos until size)
+                                val tail = line.sliceArray(0 until size - pos)
+                                head.forEachIndexed { index, c -> line[index] = c }
+                                tail.forEachIndexed { index, c -> line[index + pos] = c }
+                            }
+                            'x' -> {
+                                val (from, to) = it.substring(1).split('/').map { it.toInt() }
+                                val dest = line[to]
+                                line[to] = line[from]
+                                line[from] = dest
+                            }
+                            'p' -> {
+                                val (from, to) = it.substring(1).split('/').map { line.indexOf(it[0]) }
+                                val dest = line[to]
+                                line[to] = line[from]
+                                line[from] = dest
+                            }
+                        }
+                    }
+                    line.joinToString("").let {
+                        outputs.add(it)
+                        if (seen.contains(it)) {
+                            return outputs[iterations % i - 1]
+                        }
+                        seen.add(it)
+                    }
+                }
+                throw IllegalStateException("Shouldn't be reached")
+            }
+
 }
 
