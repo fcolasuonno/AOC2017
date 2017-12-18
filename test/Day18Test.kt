@@ -8,7 +8,7 @@ class Day18Test {
 
     @Test
     fun part1() {
-        var testInput = listOf("set a 1",
+        val testInput = listOf("set a 1",
                 "add a 2",
                 "mul a a",
                 "mod a 5",
