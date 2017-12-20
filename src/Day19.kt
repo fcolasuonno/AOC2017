@@ -8,7 +8,6 @@ object Day19 {
 
     fun part1(input: List<String>): String {
         var output = ""
-        var size = input.first().length
         val map = input.map { it.toCharArray().toTypedArray() }.toTypedArray()
         val start = Pair(map[0].indexOfFirst { it == '|' }, 0)
         var dir = Direction.DOWN
@@ -44,7 +43,6 @@ object Day19 {
 
     fun part2(input: List<String>): Int {
         var output = 0
-        var size = input.first().length
         val map = input.map { it.toCharArray().toTypedArray() }.toTypedArray()
         val start = Pair(map[0].indexOfFirst { it == '|' }, 0)
         var dir = Direction.DOWN
