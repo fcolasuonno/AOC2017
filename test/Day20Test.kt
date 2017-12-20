@@ -17,6 +17,6 @@ class Day20Test {
                 "p=<-4,0,0>, v=< 2,0,0>, a=< 0,0,0>",
                 "p=<-2,0,0>, v=< 1,0,0>, a=< 0,0,0>",
                 "p=< 3,0,0>, v=<-1,0,0>, a=< 0,0,0>")))
-        assertEquals(7493, Day20.part2(input))
+        assertEquals(461, Day20.part2(input))
     }
 }

@@ -1,42 +1,51 @@
-object Day20 {
-    data class Particle(var px: Int, var py: Int, var pz: Int, var vx: Int, var vy: Int, var vz: Int, val ax: Int, val ay: Int, val az: Int) {
-        fun tick() {
-            vx += ax
-            vy += ay
-            vz += az
+import kotlin.math.abs
 
-            px += vx
-            py += vy
-            pz += vz
+object Day20 {
+    data class Particle(var p: Day20.Vec3, var v: Day20.Vec3, val a: Day20.Vec3) {
+        fun tick() {
+            v += a
+
+            p += v
+        }
+    }
+
+    data class Vec3(var x: Int, var y: Int, var z: Int) {
+        operator fun plus(other: Vec3): Vec3 {
+            return Vec3(x + other.x, y + other.y, z + other.z)
+        }
+
+        fun manhattanDistance(): Int {
+            return abs(x) + abs(y) + abs(z)
         }
     }
 
     fun part1(input: List<String>): Int {
         val particles = input.map {
-            val values =
-                    "p=<([^,]+),([^,]+),([^>]+)>, v=<([^,]+),([^,]+),([^>]+)>, a=<([^,]+),([^,]+),([^>]+)>"
-                            .toRegex().matchEntire(it)!!.groupValues.drop(1).map { it.trim().toInt() }
-            Particle(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8])
+            "p=<([^,]+),([^,]+),([^>]+)>, v=<([^,]+),([^,]+),([^>]+)>, a=<([^,]+),([^,]+),([^>]+)>"
+                    .toRegex().matchEntire(it)!!.groupValues.drop(1).map { it.trim().toInt() }
+                    .chunked(3) { Vec3(it[0], it[1], it[2]) }
+                    .let { Particle(it[0], it[1], it[2]) }
         }
 
-        return particles.withIndex().groupBy { Math.abs(it.value.ax) + Math.abs(it.value.ay) + Math.abs(it.value.az) }
+        return particles.withIndex().groupBy { it.value.a.manhattanDistance() }
                 .minBy { it.key }!!.value
-                .groupBy { Math.abs(it.value.vx) + Math.abs(it.value.vy) + Math.abs(it.value.vz) }
+                .groupBy { it.value.v.manhattanDistance() }
                 .minBy { it.key }!!.value
-                .groupBy { Math.abs(it.value.px) + Math.abs(it.value.py) + Math.abs(it.value.pz) }
+                .groupBy { it.value.p.manhattanDistance() }
                 .minBy { it.key }!!.value.single().index
     }
 
+
     fun part2(input: List<String>): Int {
         var particles = input.map {
-            val values =
-                    "p=<([^,]+),([^,]+),([^>]+)>, v=<([^,]+),([^,]+),([^>]+)>, a=<([^,]+),([^,]+),([^>]+)>"
-                            .toRegex().matchEntire(it)!!.groupValues.drop(1).map { it.trim().toInt() }
-            Particle(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8])
+            "p=<([^,]+),([^,]+),([^>]+)>, v=<([^,]+),([^,]+),([^>]+)>, a=<([^,]+),([^,]+),([^>]+)>"
+                    .toRegex().matchEntire(it)!!.groupValues.drop(1).map { it.trim().toInt() }
+                    .chunked(3) { Vec3(it[0], it[1], it[2]) }
+                    .let { Particle(it[0], it[1], it[2]) }
         }
         for (i in 0..1000) {
             particles.forEach { it.tick() }
-            particles = particles.groupBy { Triple(it.px, it.py, it.pz) }.filter { it.value.size == 1 }.values.map { it.single() }
+            particles = particles.groupBy { it.p }.filterValues { it.size == 1 }.values.map { it.single() }
         }
         return particles.count()
     }
